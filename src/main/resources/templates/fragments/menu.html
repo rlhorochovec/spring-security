@@ -1,0 +1,31 @@
+<header th:fragment="header">
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" th:href="@{/}">
+			Spring Security
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="topNavbar">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/}">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/user}">Usuário</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/admin}">Admin</a>
+				</li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<a class="nav-link" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:if="${#request.userPrincipal == null}" th:href="@{/login}">Login</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>

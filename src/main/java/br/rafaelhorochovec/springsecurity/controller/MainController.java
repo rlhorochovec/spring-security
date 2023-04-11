@@ -16,8 +16,8 @@ public class MainController {
  
     @RequestMapping(value = { "/" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
-        model.addAttribute("title", "Olá!");
-        model.addAttribute("message", "Bem vindo a página inicial.");
+        model.addAttribute("title", "Spring Security");
+        model.addAttribute("message", "Thymeleaf, Spring boot, Spring security");
         return "index";
     }
  
@@ -31,22 +31,14 @@ public class MainController {
  
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model) {
+        model.addAttribute("title", "Login");
         return "login";
-    }
- 
-    @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
-    public String logoutSuccessfulPage(Model model) {
-        model.addAttribute("title", "Logout");
-        return "logoutSuccessful";
     }
  
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal) {
         // After user login successfully.
         String usuario = principal.getName();
- 
-        System.out.println("UserName: " + usuario);
- 
         User usuarioLogado = (User) ((Authentication) principal).getPrincipal();
         String usuarioInfo = WebUtils.toString(usuarioLogado);
         model.addAttribute("usuarioInfo", usuarioInfo);
@@ -59,10 +51,8 @@ public class MainController {
             User usuarioLogado = (User) ((Authentication) principal).getPrincipal();
             String usuarioInfo = WebUtils.toString(usuarioLogado);
             model.addAttribute("usuarioInfo", usuarioInfo);
-            String message = "Opa!!!  " + principal.getName() //
-                    + "<br> Você não deveria estar aqui.";
+            String message = "Acesso negado.";
             model.addAttribute("message", message);
- 
         }
         return "403";
     }

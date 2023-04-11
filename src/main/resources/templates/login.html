@@ -1,40 +1,37 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Login</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+	<title th:utext="${title}"></title>
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+		  integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+		  crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
-<body>
-	<!-- Include _menu.html -->
-	<th:block th:include="/menu"></th:block>
-
-	<h1>Login</h1>
-	<!-- /login?error=true -->
-	<div th:if="${#request.getParameter('error') == 'true'}"
-		style="color: red; margin: 10px 0px;">
-		Login falhou!!!<br /> Motivo : <span
-			th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
-			th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></span>
-
+<body class="text-center">
+<form class="form-signin" name='f' th:action="@{/j_spring_security_check}" method='POST'>
+	<img class="mb-4" src="https://spring.io/img/spring.svg" alt="" width="72" height="72">
+	<h1 class="h3 mb-3 font-weight-normal">Efetuar login</h1>
+	<div th:if="${#request.getParameter('error') == 'true'}">
+		<div class="alert alert-danger">
+			Usuário e/ou senha inválidos!
+		</div>
 	</div>
-	<h3>Efetuar login</h3>
-	<form name='f' th:action="@{/j_spring_security_check}" method='POST'>
-		<table>
-			<tr>
-				<td>Usuario:</td>
-				<td><input type='text' name='username' value=''></td>
-			</tr>
-			<tr>
-				<td>Senha:</td>
-				<td><input type='password' name='password' /></td>
-			</tr>
-			<tr>
-				<td>Lembrar-me?</td>
-				<td><input type="checkbox" name="remember-me" /></td>
-			</tr>
-			<tr>
-				<td><input name="submit" type="submit" value="submit" /></td>
-			</tr>
-		</table>
-	</form>
+	<label for="inputUser" class="sr-only">Usuário</label>
+	<input type="username" id="inputUser" class="form-control" placeholder="Usuário" name="username" required autofocus>
+	<label for="inputPassword" class="sr-only">Senha</label>
+	<input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="password" required>
+	<div class="checkbox mb-3">
+		<label>
+			<input type="checkbox" value="remember-me"> Lembre-se
+		</label>
+	</div>
+	<button class="btn btn-lg btn-success btn-block" type="submit" name="submit">Entrar</button>
+	<p class="mt-5 mb-3 text-muted">&copy; Rafael Horohovec</p>
+</form>
 </body>
 </html>
