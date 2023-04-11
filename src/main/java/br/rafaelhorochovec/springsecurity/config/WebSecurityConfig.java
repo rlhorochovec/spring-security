@@ -60,16 +60,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
 		// Config for Login Form
-		http.authorizeRequests().and().formLogin()//
+		http.authorizeRequests().and().formLogin()
 				// Submit URL of login page.
 				.loginProcessingUrl("/j_spring_security_check") // Submit URL
-				.loginPage("/login")//
-				.defaultSuccessUrl("/userAccountInfo")//
-				.failureUrl("/login?error=true")//
-				.usernameParameter("username")//
+				.loginPage("/login")
+				.defaultSuccessUrl("/user")
+				.failureUrl("/login?error=true")
+				.usernameParameter("username")
 				.passwordParameter("password")
 				// Config for Logout Page
-				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
 		// Config Remember Me.
 		http.authorizeRequests().and() //
